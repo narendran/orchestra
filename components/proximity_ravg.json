@@ -1,0 +1,10 @@
+{
+  "name": "color",
+  "filter": [""],
+  "sources": ["proximity"],
+  "module": {
+    "name": "running_avg",
+    "params": ["r"]
+  },
+  "publish": "proximity_ravg"
+}

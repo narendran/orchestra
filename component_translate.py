@@ -1,14 +1,15 @@
 #!/usr/bin/python
 
 import fileinput
+import glob
 import json
 import sys
 
 modulehub = {}
 
 
-def addModule(mname, jsontext):
-    modulehub[mname] = jsontext
+def addModule(module):
+    modulehub[module['name']] = module
 
 
 def getModule(mname):
@@ -64,8 +65,10 @@ def expand_component(jsontext):
 
 
 def main():
-    ravg = open('module.json', 'r')
-    addModule('running_avg', json.loads('\n'.join(ravg.readlines())))
+    for moduleLoc in glob.glob('modules/*.json'):
+        ravg = open(moduleLoc, 'r')
+        addModule(json.loads('\n'.join(ravg.readlines())))
+
     f = open(sys.argv[1], 'r')
     print expand_component('\n'.join(f.readlines()))
 
