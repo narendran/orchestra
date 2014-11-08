@@ -1,0 +1,12 @@
+{
+  "name": "running_avg",
+  "input": "inputtype",
+  "logic": {
+    "initialization": ["wavg = 0"],
+    "output": ["wavg"],
+    "iteration": [
+      "wavg = wavg * 0.8 + params[0] * 0.2"
+    ]
+  },
+  "output": "outputtype"
+}

@@ -1,0 +1,10 @@
+{
+  "name": "brightness",
+  "filter": [""],
+  "sources": ["light_sensor"],
+  "module": {
+    "name": "running_avg",
+    "params": ["reading"]
+  },
+  "publish": "brightness_ravg"
+}
