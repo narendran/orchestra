@@ -5,7 +5,15 @@
     "initialization": ["conjunction = 0"],
     "output": ["conjunction"],
     "iteration": [
-        "conjunction = (((params[0] > params[3]) and params[2]) or ((params[0] < params[3]) and not params[2])) and (((params[1] > params[5]) and params[4]) or ((params[1] < params[5]) and not params[4]))"
+        "lower1 = params[2]",
+        "upper1 = params[3]",
+        "lower2 = params[4]",
+        "upper2 = params[5]",
+        "# Ranging params[0] given predicate params[1] is true",
+        "if lower2 <= params[1] <= upper2:",
+        "  conjunction = (params[0] - lower1) / (upper1 - lower1)",
+        "else:",
+        "  conjunction = -1"
     ]
   },
   "output": "outputtype"
