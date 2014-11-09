@@ -20,11 +20,10 @@ def expand_component(jsontext):
     component = json.loads(jsontext)
     output_python = []
 
-    output_python.append('import config')
     output_python.append('import redis')
     output_python.append('import json')
-    output_python.append("r = redis.StrictRedis(host=config.RAW_QUEUE_HOST, port=config.RAW_QUEUE_PORT, db=0)")
-    output_python.append("s = redis.StrictRedis(host=config.PROCESSED_QUEUE_HOST, port=config.PROCESSED_QUEUE_PORT, db=0)")
+    output_python.append("r = redis.StrictRedis(host='localhost', db=0)")
+    output_python.append("s = redis.StrictRedis(port=6380, host='localhost', db=0)")
     output_python.append("p = r.pubsub(ignore_subscribe_messages=True)")
     output_python.append("sources = []")
 
@@ -57,9 +56,8 @@ def expand_component(jsontext):
     output_python.append("    continue")
     output_python.append("")
     output_python.append("  data = json.loads(m['data'])")
-    output_python.append("  indices = [i for i, x in enumerate(sources) if x == str(m['channel'])]")
-    output_python.append("  for p_index in indices:")
-    output_python.append("    params[p_index] = float(data[field[p_index]])")
+    output_python.append("  p_index = sources.index(str(m['channel']))")
+    output_python.append("  params[p_index] = float(data[field[p_index]])")
 
     output_python.append("  for i,line in enumerate(constants):")
     output_python.append("    params[len(field)+i] = float(line)")

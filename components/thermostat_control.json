@@ -1,0 +1,10 @@
+{
+  "name": "volumecontrol",
+  "filter": [""],
+  "sources": ["myo_sensor", "myo_sensor"],
+  "module": {
+    "name": "predicated_constraint",
+    "params": ["1:y", "-0.5", "-0.1", "2:x", "-0.4", "0"]
+  },
+  "publish": "volume_control"
+}

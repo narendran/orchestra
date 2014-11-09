@@ -1,0 +1,9 @@
+{
+  "name": "firewarningmessage",
+  "filter": [""],
+  "sources": ["fire_probability"],
+  "module": {
+    "name": "lcdrgb",
+    "params": ["1:value"]
+  }
+}
