@@ -1,14 +1,15 @@
 #!/usr/bin/python
 
 import fileinput
+import glob
 import json
 import sys
 
 modulehub = {}
 
 
-def addModule(mname, jsontext):
-    modulehub[mname] = jsontext
+def addModule(module):
+    modulehub[module['name']] = module
 
 
 def getModule(mname):
@@ -22,7 +23,7 @@ def expand_component(jsontext):
     output_python.append('import redis')
     output_python.append('import json')
     output_python.append("r = redis.StrictRedis(host='localhost', db=0)")
-    output_python.append("p = r.pubsub()")
+    output_python.append("p = r.pubsub(ignore_subscribe_messages=True)")
 
     for source in component['sources']:
         output_python.append("p.subscribe('%s')" % (source))
@@ -36,8 +37,7 @@ def expand_component(jsontext):
 
     # From this point on, we handle processing every new tuple
     output_python.append("")
-    output_python.append("while True:")
-    output_python.append("  m = p.get_message()")
+    output_python.append("for m in p.listen():")
 
     # Ignore non-"message" messages
     output_python.append("  if m is None or m['type'] not in ('message', 'pmessage'):")
@@ -64,8 +64,10 @@ def expand_component(jsontext):
 
 
 def main():
-    ravg = open('module.json', 'r')
-    addModule('running_avg', json.loads('\n'.join(ravg.readlines())))
+    for moduleLoc in glob.glob('modules/*.json'):
+        ravg = open(moduleLoc, 'r')
+        addModule(json.loads('\n'.join(ravg.readlines())))
+
     f = open(sys.argv[1], 'r')
     print expand_component('\n'.join(f.readlines()))
 
