@@ -4,7 +4,7 @@
   "sources": ["myo_sensor", "myo_sensors"],
   "module": {
     "name": "predicated_constraint",
-    "params": ["1:x", "1", "0.4", "2:y", "1", "0.3"]
+    "params": ["1:x", "1", "-0.5", :2:, "2:y", "1", "0.3"]
   },
   "publish": "volume_control"
 }
