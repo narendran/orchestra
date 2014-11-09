@@ -1,10 +1,10 @@
 {
-  "name": "volumecontrol",
+  "name": "thermostat_control",
   "filter": [""],
   "sources": ["myo_sensor", "myo_sensor"],
   "module": {
     "name": "predicated_constraint",
     "params": ["1:y", "-0.5", "-0.1", "2:x", "-0.4", "0"]
   },
-  "publish": "volume_control"
+  "publish": "thermostat_control"
 }
