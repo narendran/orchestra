@@ -1,0 +1,10 @@
+{
+  "name": "sound_detector",
+  "filter": [""],
+  "sources": ["sound_sensor"],
+  "module": {
+    "name": "spike_detection",
+    "params": ["1:reading", "200"]
+  },
+  "publish": "sound_detection_results"
+}

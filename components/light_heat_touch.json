@@ -1,0 +1,10 @@
+{
+  "name": "fireprobability",
+  "filter": [""],
+  "sources": ["light_sensor","heat_sensor","touch_sensor"],
+  "module": {
+    "name": "switched_correlator",
+    "params": ["1:reading","20", "2:reading", "30", "3:reading"]
+  },
+  "publish": "fire_probability"
+}

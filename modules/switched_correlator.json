@@ -1,0 +1,12 @@
+{
+  "name": "switched_correlator",
+  "input": "inputtype",
+  "logic": {
+    "initialization": ["correlation_effect = 0"],
+    "output": ["correlation_effect"],
+    "iteration": [
+        "correlation_effect = (params[0] > params[3]) and (params[1] > params[4]) and (params[2] != 0)"
+    ]
+  },
+  "output": "outputtype"
+}
